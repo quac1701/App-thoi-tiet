@@ -27,6 +27,11 @@
     position: absolute;
     left: 0;
 }
+
+.microphone{
+    cursor: pointer;
+}
+
 #search-input{
     color: white;
     border: 0;

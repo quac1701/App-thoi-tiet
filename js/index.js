@@ -37,3 +37,32 @@ searchInput.addEventListener('change', (e)=>{
         });
     });
 });
+
+// microphone
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = 'vi-VI';
+recognition.continuous = false;
+const microphone = document.querySelector(' .microphone');
+
+microphone.addEventListener('click', (e)=>{
+    e.preventDefault();
+    recognition.start();
+});
+
+recognition.onspeechend = () =>{
+    recognition.stop();
+}
+
+recognition.onerror = (err) =>{
+    console.error(err);
+}
+
+recognition.onresult = (e) =>{
+    console.log ('onresult',e);
+    const text = e.results[0][0].transcript;
+    handleVoice(text);
+}
