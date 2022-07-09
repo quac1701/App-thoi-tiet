@@ -13,6 +13,7 @@ const sunset = document.querySelector('.sunset');
 const humidity = document.querySelector('.humidity');
 const windSpeed = document.querySelector('.wind-speed');
 
+
 searchInput.addEventListener('change', (e)=>{
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${e.target.value}&appid=${APP_ID}`)
     .then (async res =>{
@@ -47,6 +48,18 @@ const recognition = new SpeechRecognition();
 recognition.lang = 'vi-VI';
 recognition.continuous = false;
 const microphone = document.querySelector(' .microphone');
+
+const handleVoice = (text) => {
+    console.log('text',text); 
+    const handleText = text.toLowerCase();
+    if (handleText.includes('thời tiết')){
+        const location = handleText.split('tiết')[1].trim();
+        console.log(location);
+        searchInput.value = location;
+        const changeEvent = new Event('change');
+        searchInput.dispatchEvent(changeEvent); 
+    }
+}
 
 microphone.addEventListener('click', (e)=>{
     e.preventDefault();
